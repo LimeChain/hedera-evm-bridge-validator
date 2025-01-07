@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "args": [],
+            "env": {},
+            "buildFlags": "",
+            "init": "",
+            "cwd": "${workspaceFolder}",
+            "output": "",
+            "showLog": true,
+            "dlvToolPath": "${env:GOPATH}/bin/dlv"
+        }
+    ]
+}

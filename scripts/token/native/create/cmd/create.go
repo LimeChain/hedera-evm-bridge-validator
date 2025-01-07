@@ -19,13 +19,14 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strings"
+
 	"github.com/hashgraph/hedera-sdk-go/v2"
 	mirrorNode "github.com/limechain/hedera-eth-bridge-validator/app/clients/hedera/mirror-node"
 	"github.com/limechain/hedera-eth-bridge-validator/config"
 	"github.com/limechain/hedera-eth-bridge-validator/scripts/client"
 	"github.com/limechain/hedera-eth-bridge-validator/scripts/token/associate"
 	"github.com/limechain/hedera-eth-bridge-validator/scripts/token/native/create"
-	"strings"
 )
 
 const (
@@ -39,6 +40,10 @@ func main() {
 	network := flag.String("network", "", "Hedera Network Type")
 	bridgeID := flag.String("bridgeID", "0.0", "Bridge account ID")
 	memberPrKeys := flag.String("memberPrKeys", "", "The count of the members")
+	tokenName := flag.String("name", "Hedera Native Generic Token", "token name")
+	tokenSymbol := flag.String("symbol", "HNT", "token symbol")
+	decimals := flag.Uint("decimals", 8, "decimals")
+	setSupplyKey := flag.Bool("setSupplyKey", true, "Sets supply key to be the deployer")
 	flag.Parse()
 	if *privateKey == "0x0" {
 		panic("Private key was not provided")
@@ -49,11 +54,6 @@ func main() {
 	if *bridgeID == "0.0" {
 		panic("Bridge id was not provided")
 	}
-
-	tokenName := flag.String("name", "Hedera Native Generic Token", "token name")
-	tokenSymbol := flag.String("symbol", "HNT", "token symbol")
-	decimals := flag.Uint("decimals", 8, "decimals")
-	setSupplyKey := flag.Bool("setSupplyKey", true, "Sets supply key to be the deployer")
 
 	fmt.Println("-----------Start-----------")
 	cl := client.Init(*privateKey, *accountID, *network)

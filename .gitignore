@@ -26,7 +26,7 @@ coverage.txt
 
 scripts/**/*.yml
 
-.vscode
+#.vscode
 
 # Ignore data persistence
 prometheus_data
